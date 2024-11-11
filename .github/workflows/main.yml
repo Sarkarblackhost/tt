@@ -1,0 +1,38 @@
+name: Run Soul Workflow
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '*/5 * * * *'
+
+jobs:
+  run_soul_workflow:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v2
+
+      - name: binary by bgmi
+        run: chmod +x bgmi
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+
+      - name: Install required packages
+        run: |
+          pip install telebot pymongo aiohttp
+          pip install pyTelegramBotAPI
+          pip install pymongo
+          pip install aiohttp
+          pip install telebot
+          pip install pytz
+          pip install telebot pymongo aiohttp
+          pip install psutil
+
+
+      - name: Run bot.py
+        run: python3 bot.py
